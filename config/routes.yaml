@@ -1,3 +1,19 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+delete_contact:
+    path: '/delete/{id}'
+    controller: App\Controller\ContactController::deleteContact
+    methods: ['DELETE']
+    requirements:
+        id: \d+
+
+edit_contact:
+    path: '/{contactName}'
+    controller: 'App\Controller\ContactController::edit'
+
+add_contact:
+    path: '/add'
+    controller: 'App\Controller\ContactController::addContact'
+    methods: ['POST']

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit contact{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Edit contact</h1>
+    <div class="float-start">{{ include('contact/_form_delete.html.twig') }}</div>
+    {{ include('contact/_form.html.twig') }}
+  </div>
+  <div class="container mt-4">
+    <a class="btn btn-secondary btn-sm mt-4" href="{{ path('app_contact_index') }}">Back to Contact List</a>
+  </div>
+{% endblock %}

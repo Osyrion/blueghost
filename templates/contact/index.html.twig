@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact List{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Contact List</h1>
+
+<div class="container">
+  <a href="{{ path('app_contact_add') }}" class="btn btn-success m-2">add new contact</a>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Email</th>
+      <th>Telephone</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contact in pagination %}
+      <tr>
+        <td>{{ contact.id }}</td>
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.surname }}</td>
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.telephone }}</td>
+        <td class="">
+          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#noteModal{{ contact.id }}">
+            Show Note
+          </button>
+          {# Modal for each contact #}
+          <div class="modal fade" id="noteModal{{ contact.id }}" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="noteModalLabel">Note for {{ contact.name }} {{ contact.surname }}</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  {{ contact.note }}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="{{ path('app_contact_edit', {'slug': contact.generateSlug()}) }}" class="btn btn-sm btn-warning">Edit</a>
+          {{ include('contact/_form_delete.html.twig') }}
+        </td>
+      </tr>
+    {% else %}
+      <tr>
+        <td colspan="7" class="text-center">Data not found!</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <div>
+    {{ knp_pagination_render(pagination) }}
+  </div>
+</div>
+{% endblock %}

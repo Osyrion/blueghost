@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create contact{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Create contact</h1>
+
+    {{ include('contact/_form.html.twig') }}
+
+  </div>
+  <div class="container mt-4">
+    <a class="btn btn-secondary mt-4 btn-sm" href="{{ path('app_contact_index') }}">Back to Contact List</a>
+  </div>
+{% endblock %}
